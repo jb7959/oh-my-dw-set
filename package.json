@@ -1,0 +1,25 @@
+{
+  "name": "oh-my-dw-set",
+  "version": "1.0.0",
+  "description": "Getting started to build basic data warehouse set with Graphql, Star-schema and etc",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-server": "^3.8.1",
+    "graphql": "^16.5.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jb7959/oh-my-dw-set.git"
+  },
+  "author": "jb7959@naver.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jb7959/oh-my-dw-set/issues"
+  },
+  "homepage": "https://github.com/jb7959/oh-my-dw-set#readme"
+}
