@@ -2,7 +2,7 @@
   "name": "oh-my-dw-set",
   "version": "1.0.0",
   "description": "Getting started to build basic data warehouse set with Graphql, Star-schema and etc",
-  "main": "index.js",
+  "main": "src/index.js",
   "dependencies": {
     "apollo-server": "^3.8.1",
     "graphql": "^16.5.0"

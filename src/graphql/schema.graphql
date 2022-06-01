@@ -1,0 +1,26 @@
+ // The GraphQL schema
+ // https://graphql.org/learn/schema/
+
+  type FactTable {
+    column1: ID
+    column2: String
+    column3: Int
+    column4: Float
+    column5: Boolean
+  }
+
+  type FactTable2 {
+    column1: ID
+    column2: String
+    column3: Int
+    column4: Float
+    column5: Boolean
+  }
+
+  type Query {
+    "Find dimensions from FactTable"
+    dimensions: [FactTable]
+
+    "Find dimensions from FactTable2"
+    dimensions2: [FactTable2]
+  }

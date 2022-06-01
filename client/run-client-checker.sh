@@ -1,21 +1,9 @@
 #!/bin/sh
+echo 'Trino client check beginning!'
 
-i=0
-echo $1 $2 $3 $4
+# https://trino.io/docs/current/installation/cli.html
+client/trino-cli-382-executable.jar --version
 
-sleep $4
+# TODO: check the servers status
 
-while [ $i -ne $2 ]
-do
-  j=0
-  while [ $j -ne $1 ]
-  do
-      echo '['$j'/'$i']Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus sagittis sollicitudin purus, a se'
-      j=$((j+1))
-  done
-
-  sleep $3
-  i=$((i+1))
-done
-
-echo 'done'
+echo 'Trino client check complete!'

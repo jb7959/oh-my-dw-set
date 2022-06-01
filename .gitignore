@@ -131,3 +131,6 @@ dist
 
 # etc
 .idea
+.live-env
+.stage-env
+.local-env

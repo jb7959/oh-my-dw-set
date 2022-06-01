@@ -38,13 +38,23 @@ const FactTable = [
     }
 ]
 
+const getData = (param) => {
+    return [{
+        column1: `id-${Date.now()}`,
+        column2: param,
+        column3: 3,
+        column4: 4.0,
+        column5: true
+    }]
+}
+
 // A map of functions which return data for the schema.
 // Keys of Query Object can be dimensions not defined yet
 // Value of Query Object can be target fact tables
 const resolvers = {
     Query: {
         dimensions: () => FactTable,
-        dimensions2: () => FactTable
+        dimensions2: () => getData('1'),
     },
 };
 
