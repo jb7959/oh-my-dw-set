@@ -1,31 +1,47 @@
-const { ApolloServer, gql } = require('apollo-server');
+const {ApolloServer, gql} = require('apollo-server');
+const {find} = require("./finder");
 
 // The GraphQL schema
 // https://graphql.org/learn/schema/
 const typeDefs = gql`
-  type FactTable {
-    column1: ID
-    column2: String
-    column3: Int
-    column4: Float
-    column5: Boolean  
-  }
-  
-  type FactTable2 {
-    column1: ID
-    column2: String
-    column3: Int
-    column4: Float
-    column5: Boolean  
-  }
-  
-  type Query {
-    "Find dimensions from FactTable"
-    dimensions: [FactTable]
-    
-    "Find dimensions from FactTable2"
-    dimensions2: [FactTable2] 
-  }
+    type FactTable {
+        column1: ID
+        column2: String
+        column3: Int
+        column4: Float
+        column5: Boolean
+    }
+
+    type FactTable2 {
+        column1: ID
+        column2: String
+        column3: Int
+        column4: Float
+        column5: Boolean
+    }
+
+    type UserEventWithBasicInfo {
+        seq: Int
+        systemid: String
+        displayid: String
+        name: String
+        age: Int
+        eventtype: String
+        eventdata: String
+    }
+
+    type Query {
+        "Find dimensions from FactTable"
+        dimensions: [FactTable]
+
+        "Find dimensions from FactTable2"
+        dimensions2: [FactTable2]
+
+        "Find users event with basic information"
+        userEventWithBasicInfo: [UserEventWithBasicInfo]
+
+
+    }
 `;
 
 const FactTable = [
@@ -55,6 +71,25 @@ const resolvers = {
     Query: {
         dimensions: () => FactTable,
         dimensions2: () => getData('1'),
+        userEventWithBasicInfo: async () => {
+            const query = 'SELECT seq, systemid, displayid, name, age, eventtype, eventdata' +
+                ' FROM' +
+                ' postgresql.public.users as pu,' +
+                ' mongodb.ohmydw.events as me' +
+                ' WHERE pu.id = me.systemid'
+            const result = await find(query);
+            return result.data.map((d) => {
+                return {
+                    seq: d[0],
+                    systemid: d[1],
+                    displayid: d[2],
+                    name: d[3],
+                    age: d[4],
+                    eventtype: d[5],
+                    eventdata: d[6]
+                }
+            });
+        },
     },
 };
 
@@ -63,6 +98,6 @@ const server = new ApolloServer({
     resolvers,
 });
 
-server.listen().then(({ url }) => {
+server.listen().then(async ({url}) => {
     console.log(`🚀 Server ready at ${url}`);
 });
