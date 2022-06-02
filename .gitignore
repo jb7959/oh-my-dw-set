@@ -131,6 +131,7 @@ dist
 
 # etc
 .idea
-.live-env
-.stage-env
-.local-env
+scripts/.live-env
+scripts/.stage-env
+scripts/.dev-env
+scripts/.local-env

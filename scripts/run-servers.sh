@@ -6,25 +6,27 @@ else
 
 echo :: Beginning :: run-servers.sh
 
-if [ $0 = "local" ];
+if [ $1 = "-local" ];
 then
-  docker-compose up -d --env-file ".local-env"
-elif [ $0  = "dev" ]
+  docker-compose --env-file .local-env config
+  docker-compose up -d
+elif [ $1  = "-dev" ]
 then
-  docker-compose up -d --env-file ".dev-env"
-elif [ $0  = "stage" ]
+  docker-compose --env-file .dev-env config
+  docker-compose up -d
+elif [ $1  = "-stage" ]
 then
-  docker-compose up -d --env-file ".stage-env"
-elif [ $0  = "live" ]
+  docker-compose --env-file .stage-env config
+  docker-compose up -d
+elif [ $1  = "-live" ]
 then
-  docker-compose up -d --env-file ".live-env"
+  docker-compose --env-file .live-env config
+  docker-compose up -d
 else
   echo "You have to use => local, dev, stage"
-  echo "Now $0"
+  echo "Now $1"
   echo :: Please try again :: run-servers.sh
 fi
-## https://docs.docker.com/compose/environment-variables/
-docker-compose up -d --env-file $0
 
 echo :: Finished :: run-servers.sh
 
