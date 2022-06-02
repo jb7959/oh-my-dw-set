@@ -12,10 +12,11 @@ services:
     restart: always
     depends_on:
       - dw-postgres
+      - dw-mongodb
     ports:
       - "9900:8080"
     volumes:
-      - ./configs/trino/catalogs/postgresql.properties:/etc/trino/catalog/postgresql.properties
+      - ./configs/trino/catalogs:/etc/trino/catalog
     networks:
       - mynetwork
 
@@ -32,3 +33,17 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_USER_PW}"
     networks:
       - mynetwork
+
+  dw-mongodb:
+    image: mongo
+    container_name: dw-mongodb
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "${MONGO_USER_ID}"
+      MONGO_INITDB_ROOT_PASSWORD: "${MONGO_USER_PW}"
+    networks:
+      - mynetwork
+
+
